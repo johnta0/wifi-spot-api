@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @spot.name %>
+</p>
+
+<p>
+  <strong>English name:</strong>
+  <%= @spot.english_name %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @spot.category %>
+</p>
+
+<p>
+  <strong>Prefecture:</strong>
+  <%= @spot.prefecture %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @spot.address %>
+</p>
+
+<p>
+  <strong>Address in english:</strong>
+  <%= @spot.address_in_english %>
+</p>
+
+<p>
+  <strong>Ssid:</strong>
+  <%= @spot.ssid %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @spot.url %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @spot.longitude %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @spot.latitude %>
+</p>
+
+<%= link_to 'Edit', edit_spot_path(@spot) %> |
+<%= link_to 'Back', spots_path %>
