@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  # apiの方
+  namespace :api, format: 'json' do
+      namespace :v1 do
+          resources :spots
+      end
+  end
+  
+  # HTMLの方
   resources :spots
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: 'spots#index'
+
 end
