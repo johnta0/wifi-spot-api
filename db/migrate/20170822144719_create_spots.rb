@@ -9,8 +9,8 @@ class CreateSpots < ActiveRecord::Migration[5.1]
       t.string :address_in_english
       t.string :ssid
       t.string :url
-      t.float :longitude
       t.float :latitude
+      t.float :longitude
 
       t.timestamps
     end

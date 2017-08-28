@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20170822144719) do
     t.string "address_in_english"
     t.string "ssid"
     t.string "url"
-    t.float "longitude"
     t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
