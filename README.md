@@ -1,24 +1,43 @@
-# README
+# WiFi Spot explorer API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+クエリパラメータ radius, latitude, longitude によって指定した緯度latitude経度longitudeから半径raidusメートル以内にあるwifiスポットをjsonファイルとして返してくれるAPIです。
 
-Things you may want to cover:
+## 環境
+ruby 2.4.0
 
-* Ruby version
+## セットアップ
+1. このリポジトリをクローン
 
-* System dependencies
+  ```
+  $ git clone https://github.com/johnta0/wifi-spot-api
+  ```
 
-* Configuration
+2. ライブラリのインストール
 
-* Database creation
+  ```
+  $ bundle install
+  ```
+3. geokit-rails の設定
 
-* Database initialization
+  ```
+  $ rails g geokit_rails:install
+  ```
 
-* How to run the test suite
+4. マイグレーション & データを入れる
+  ```
+  $ rails db:migrate && rails db:seed
+  ```
+CSVファイルからDBにWiFiスポットのデータを入れます。データ量がかなり多いので時間がかかります。
 
-* Services (job queues, cache servers, search engines, etc.)
+## 動作
+  ```
+  $ rails s
+  ```
+  でサーバーを立ち上げて、
+  ```
+   http://localhost:3000/api/v1/spots?radius=RADIUS_HERE&longitude=LONGITUDE_HERE&latitude=LATITUDE_HERE
+  ```
+  を叩くと結果が返ってきます。radiusの値を省略した場合には、指定した緯度経度から 500m 以内のwifi spot を探します。
 
-* Deployment instructions
-
-* ...
+## Heroku
+[Herokuリンクはこちら]()
