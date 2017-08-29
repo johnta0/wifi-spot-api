@@ -1,5 +1,5 @@
 # These defaults are used in Geokit::Mappable.distance_to and acts_as_mappable
-Geokit::default_units = :miles # others :kms, :nms, :meters
+Geokit::default_units = :meters # others :kms, :nms, :meters
 Geokit::default_formula = :sphere
 
 # This is the timeout value in seconds to be used for calls to the geocoder web
@@ -15,8 +15,7 @@ Geokit::Geocoders::request_timeout = 3
 
 # This is your yahoo application key for the Yahoo Geocoder.
 # See http://developer.yahoo.com/faq/index.html#appid
-# and http://developer.yahoo.com/maps/rest/V1/geocode.html
-# Geokit::Geocoders::YahooGeocoder.key = 'REPLACE_WITH_YOUR_YAHOO_KEY'
+# and http://developer.yahoo.com/maps/rest/V1/geocode.html # Geokit::Geocoders::YahooGeocoder.key = 'REPLACE_WITH_YOUR_YAHOO_KEY'
 # Geokit::Geocoders::YahooGeocoder.secret = 'REPLACE_WITH_YOUR_YAHOO_SECRET'
 
 # This is your Google Maps geocoder keys (all optional).

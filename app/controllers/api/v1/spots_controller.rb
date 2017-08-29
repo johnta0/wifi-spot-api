@@ -1,4 +1,5 @@
 require "#{Rails.root}/app/controllers/application_controller.rb"
+require "geokit-rails"
 
 module Api
   module V1 class SpotsController < ApplicationController
