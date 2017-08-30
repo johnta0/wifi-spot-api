@@ -22,13 +22,20 @@ module Api
 
         # limitパラメータ
         if not params[:limit].nil?
-          limit = params[:limit]
+          limit = params[:limit].to_i
         else
           limit = 5
         end
 
+        spot = Spot.within(radius, :origin => [lat, lng])
+
+        # limitパラメータがwifiスポットのヒット件数より大きい場合の処理
+        if limit > spot.count
+          limit = spot.count
+        end
+
         # radiusメートル以内のスポットを検索して、jsonファイルにして表示
-        render json: Spot.within(radius, :origin => [lat, lng]).limit(limit)
+        render json: spot.limit(limit)
       end
 
       # GET /api/v1/spots/1
