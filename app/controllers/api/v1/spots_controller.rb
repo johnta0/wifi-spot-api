@@ -16,7 +16,7 @@ module Api
         if not params[:radius].nil?
          radius = params[:radius].to_f # km -> m
         else
-         radius = 0.5
+         radius = 500
         end
 
         # radiusメートル以内のスポットを検索して、jsonファイルにして表示
