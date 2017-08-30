@@ -14,8 +14,8 @@ module Api
         lng = params[:longitude].to_f
 
         if not params[:radius].nil?
-         radius = params[:radius].to_f # km -> m
-        else
+         radius = params[:radius].to_i # km -> m
+        elsif params[:raius].nil?
          radius = 500
         end
 
