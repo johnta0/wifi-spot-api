@@ -13,14 +13,22 @@ module Api
         lat = params[:latitude].to_f
         lng = params[:longitude].to_f
 
+        # radiusパラメータ
         if not params[:radius].nil?
          radius = params[:radius].to_i # km -> m
         elsif params[:raius].nil?
          radius = 500
         end
 
+        # limitパラメータ
+        if not params[:limit].nil?
+          limit = params[:limit]
+        else
+          limit = 5
+        end
+
         # radiusメートル以内のスポットを検索して、jsonファイルにして表示
-        render json: Spot.within(radius, :origin => [lat, lng])
+        render json: Spot.within(radius, :origin => [lat, lng]).limit(limit)
       end
 
       # GET /api/v1/spots/1
