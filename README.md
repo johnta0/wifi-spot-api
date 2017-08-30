@@ -1,6 +1,6 @@
 # WiFi Spot explorer API
 
-クエリパラメータ radius, latitude, longitude によって指定した緯度latitude経度longitudeから半径raidusメートル以内にあるwifiスポットをjsonファイルとして返してくれるAPIです。
+クエリパラメータ radius, latitude, longitude , limitによって指定した緯度latitude経度longitudeから半径raidusメートル以内にあるwifiスポットをlimit件、jsonファイルとして返してくれるAPIです。
 
 ## 環境
 ruby 2.4.0
@@ -35,9 +35,9 @@ CSVファイルからDBにWiFiスポットのデータを入れます。デー�
   ```
   でサーバーを立ち上げて、
   ```
-   http://localhost:3000/api/v1/spots?radius=RADIUS_HERE&longitude=LONGITUDE_HERE&latitude=LATITUDE_HERE
+   http://localhost:3000/api/v1/spots?radius=1000&longitude=139.767052&latitude=35.681167&limit=10
   ```
-  を叩くと結果が返ってきます。radiusの値を省略した場合には、指定した緯度経度から 500m 以内のwifi spot を探します。
+  を叩くと結果が返ってきます。radiusの値を省略した場合には、指定した緯度経度から 500m 以内のwifi spot を探します。また、limitパラメータを省略した場合にはレスポンス件数を5件に制限します。
 
 ## Heroku
 [Herokuリンクはこちら]()
