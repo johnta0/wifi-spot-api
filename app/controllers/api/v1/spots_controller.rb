@@ -6,41 +6,50 @@ module Api
       before_action :set_spot, only: [:show, :edit, :update, :destroy]
 
 
-      # the method to search spots within r meters
       # GET /api/v1/spots/
       def index
 
         # 緯度経度指定しない場合
         if params[:latitude].nil? or params[:longitude].nil?
-          spot = Spot.all
+          @spots = Spot.all
         # 緯度経度指定した場合
         else
           lat = params[:latitude].to_f
           lng = params[:longitude].to_f
-
           # radiusパラメータ
-          if not params[:radius].nil?
+          unless params[:radius].nil?
            radius = params[:radius].to_i # km -> m
-          elsif params[:raius].nil?
+          else
            radius = 500
           end
-          spot = Spot.within(radius, :origin => [lat, lng])
+
+          @spots = Spot.sort_by_distance(lat, lng, radius)
+
         end
 
-          # limitパラメータ
-          if not params[:limit].nil?
-            limit = params[:limit].to_i
-          else
-            limit = 5
-          end
+        # limitパラメータ
+        unless params[:limit].nil?
+          limit = params[:limit].to_i
+        else
+          limit = 5
+        end
 
-          # limitパラメータがwifiスポットのヒット件数より大きい場合の処理
-          if limit > spot.count
-            limit = spot.count
-          end
+        if limit > @spots.count
+          limit = @spots.count
+        end
 
-        # radiusメートル以内のスポットを検索して、jsonファイルにして表示
-        render json: spot.limit(limit)
+        @spots = @spots.limit(limit)
+
+        #### jsonレスポンスに distance を含めるための処理を書く
+        @spots = @spots.map do |spot|
+          spot = {
+            name: spot.name,
+            address: spot.address,
+            distance: spot.distance_from([lat, lng], :units => :meters)
+          }
+        end
+
+        render json: @spots
       end
 
       # GET /api/v1/spots/1
@@ -70,6 +79,10 @@ module Api
       def destroy
         @spot.destroy
         head :no_content
+      end
+
+      def distance
+        500
       end
 
       private
