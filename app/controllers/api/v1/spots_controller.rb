@@ -23,7 +23,9 @@ module Api
           elsif params[:raius].nil?
            radius = 500
           end
-          @spot = Spot.within(radius, :origin => [lat, lng])
+
+          # :origin から近い順に並び替え
+          @spot = Spot.within(radius, :origin => [lat, lng]).by_distance(:origin => :origin => [lat, lng])
         end
 
           # limitパラメータ
