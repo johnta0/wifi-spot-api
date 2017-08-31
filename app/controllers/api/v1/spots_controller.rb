@@ -6,13 +6,12 @@ module Api
       before_action :set_spot, only: [:show, :edit, :update, :destroy]
 
 
-      # the method to search spots within r meters
       # GET /api/v1/spots/
       def index
 
         # 緯度経度指定しない場合
         if params[:latitude].nil? or params[:longitude].nil?
-          spot = Spot.all
+          @spot = Spot.all
         # 緯度経度指定した場合
         else
           lat = params[:latitude].to_f
@@ -24,7 +23,7 @@ module Api
           elsif params[:raius].nil?
            radius = 500
           end
-          spot = Spot.within(radius, :origin => [lat, lng])
+          @spot = Spot.within(radius, :origin => [lat, lng])
         end
 
           # limitパラメータ
@@ -35,12 +34,12 @@ module Api
           end
 
           # limitパラメータがwifiスポットのヒット件数より大きい場合の処理
-          if limit > spot.count
-            limit = spot.count
+          if limit > @spot.count
+            limit = @spot.count
           end
 
         # radiusメートル以内のスポットを検索して、jsonファイルにして表示
-        render json: spot.limit(limit)
+        render json: @spot.limit(limit)
       end
 
       # GET /api/v1/spots/1
