@@ -40,8 +40,10 @@ module Api
             limit = @spot.count
           end
 
+          @spot = @spot.limit(limit)
+
         # radiusメートル以内のスポットを検索して、jsonファイルにして表示
-        render json: @spot.limit(limit)
+        render json: @spot
       end
 
       # GET /api/v1/spots/1
