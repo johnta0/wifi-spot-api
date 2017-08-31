@@ -16,7 +16,6 @@ module Api
         else
           lat = params[:latitude].to_f
           lng = params[:longitude].to_f
-
           # radiusパラメータ
           unless params[:radius].nil?
            radius = params[:radius].to_i # km -> m
@@ -24,8 +23,8 @@ module Api
            radius = 500
           end
 
-          # :origin から近い順に並び替え
-          @spots = Spot.within(radius, :origin => [lat, lng]).by_distance(:origin => [lat, lng])
+          @spots = Spot.sort_by_distance(lat, lng, radius)
+
         end
 
         # limitパラメータ
@@ -34,10 +33,11 @@ module Api
         else
           limit = 5
         end
-        # limitパラメータがwifiスポットのヒット件数より大きい場合の処理
+
         if limit > @spots.count
           limit = @spots.count
         end
+
         @spots = @spots.limit(limit)
 
         #### jsonレスポンスに distance を含めるための処理を書く
@@ -49,7 +49,6 @@ module Api
           }
         end
 
-        # radiusメートル以内のスポットを検索して、jsonファイルにして表示
         render json: @spots
       end
 
