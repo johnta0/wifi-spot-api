@@ -41,3 +41,12 @@ CSVファイルからDBにWiFiスポットのデータを入れます。デー�
 
 ## Heroku
 [Herokuリンクはこちら]()
+
+
+## 開発に際して参考にしたリンク(漏れあり）
+
+* [使えるRSpec入門・その1「RSpecの基本的な構文や便利な機能を理解する」](http://qiita.com/jnchito/items/42193d066bd61c740612)
+* [RailsでAPI作成とAPIのテストのまとめ](http://ruby-rails.hatenadiary.com/entry/20150108/1420675366)
+* [geokit-rails (Github)](https://github.com/geokit/geokit-rails)
+* [RailsでAPIを作成するために色々比較したので所感と実装方法のご紹介](http://qiita.com/Kaki_Shoichi/items/d4adcf0298ed0b4614a2)
+
