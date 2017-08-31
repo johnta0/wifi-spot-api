@@ -25,7 +25,7 @@ module Api
           end
 
           # :origin から近い順に並び替え
-          @spot = Spot.within(radius, :origin => [lat, lng]).by_distance(:origin => :origin => [lat, lng])
+          @spot = Spot.within(radius, :origin => [lat, lng]).by_distance(:origin => [lat, lng])
         end
 
           # limitパラメータ
@@ -42,8 +42,12 @@ module Api
 
           @spot = @spot.limit(limit)
 
+          #### jsonレスポンスに distance を含める処理を書く
+         
+
         # radiusメートル以内のスポットを検索して、jsonファイルにして表示
-        render json: @spot
+        #return render json: @spot
+        return @spot.to_json
       end
 
       # GET /api/v1/spots/1
