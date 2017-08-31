@@ -49,4 +49,4 @@ CSVファイルからDBにWiFiスポットのデータを入れます。デー�
 * [RailsでAPI作成とAPIのテストのまとめ](http://ruby-rails.hatenadiary.com/entry/20150108/1420675366)
 * [geokit-rails (Github)](https://github.com/geokit/geokit-rails)
 * [RailsでAPIを作成するために色々比較したので所感と実装方法のご紹介](http://qiita.com/Kaki_Shoichi/items/d4adcf0298ed0b4614a2)
-
+* [RSpecを使ってAPIのテストを行う](http://qiita.com/yu_0105/items/c7f09e7a92d22d27c312)
