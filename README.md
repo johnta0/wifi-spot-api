@@ -40,7 +40,8 @@ CSVファイルからDBにWiFiスポットのデータを入れます。デー�
   を叩くと「東京駅周辺1000mにあるwifiスポットを、10件まで制限」した結果が返ってきます。radiusの値を省略した場合には、指定した緯度経度から 500m 以内のwifi spot を探します。また、limitパラメータを省略した場合にはレスポンス件数を5件に制限します。
 
 ## Heroku
-[Herokuリンクはこちら]()
+Heroku URL: https://wifi-spot-explorer.herokuapp.com/
+[東京駅周辺1000mにあるwifiスポットを、10件まで制限した結果](https://wifi-spot-explorer.herokuapp.com/api/v1/spots?radius=1000&longitude=139.767052&latitude=35.681167&limit=10)
 
 
 ## 開発に際して参考にしたリンク(漏れあり）
