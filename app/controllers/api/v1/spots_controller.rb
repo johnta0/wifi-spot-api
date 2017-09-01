@@ -16,6 +16,8 @@ module Api
         else
           lat = params[:latitude].to_f
           lng = params[:longitude].to_f
+
+          latlng = [lat, lng]
           # radiusパラメータ
           unless params[:radius].nil?
            radius = params[:radius].to_i # km -> m
@@ -23,7 +25,7 @@ module Api
            radius = 500
           end
 
-          @spots = Spot.sort_by_distance(lat, lng, radius)
+          @spots = Spot.sort_by_distance(latlng, radius)
 
         end
 
@@ -45,7 +47,7 @@ module Api
           spot = {
             name: spot.name,
             address: spot.address,
-            distance: spot.distance_from([lat, lng], :units => :meters)
+            distance: spot.distance_from(latlng, :units => :meters)
           }
         end
 
