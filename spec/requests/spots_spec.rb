@@ -4,17 +4,17 @@ RSpec.describe "Spots", type: :request do
 
   describe "GET /api/v1/spots" do
 
-    it "spots一覧の取得ができること" do
+    before do
+      get api_v1_spots_path
+      @json = JSON.parse(response.body)
+    end
 
-      get '/api/v1/spots'
-
-      # status code の確認
+    it "should be status 200" do
       expect(response).to have_http_status(200)
+    end
 
-      # json
-      json = JSON.parse(response.body)
-      expect(json.size).to eq 5
-
+    it "returns json whose size is 5" do
+      expect(@json.size).to eq 5
     end
 
   end
@@ -22,33 +22,23 @@ RSpec.describe "Spots", type: :request do
   describe "GET /api/v1/spots?(パラメータ指定)" do
 
     before do
-      @lat = 35.681167, @lng = 139.767052, @radius = 1000
+      # # テストするスポット
+      # @lat = 35.681167, @lng = 139.767052, @latlng = [@lat, @lng], @radius = 1000, @limit =
+      # @spot_to_test = Spot.within(@radius, :origin => @latlng).by_distance(:origin => @latlng).limit(@limit)[1]
 
-      get '/api/v1/spots', params: {radius: 1000, latitude: 35.681167, longitude: 139.767052, limit: 3}
+      get '/api/v1/spots', params: {radius: "1000", latitude: "35.681167", longitude: "139.767052", limit: "1"}
       @json_by_params = JSON.parse(response.body)
     end
 
-    it "クエリパラメータを指定してレスポンスを得られること" do
-
-      # status code
+    it "returns response with status 200" do
       expect(response).to have_http_status(200)
-
     end
 
-    it "limit通りの数のjsonが返ってきてること" do
-     expect(@json_by_params.size).to eq 3
-    end
-
-    it "nameが正しいこと" do
-      expect(@json_by_params[1]["name"].to eq Spot.sort_by_distance(@lat, @lng, @radius).limit(3)[1]["name"])
-    end
-
-    it "addressが正しいこと" do
-      expect(@json_by_params[1]["address"].to eq Spot.sort_by_distance(@lat, @lng, @radius).limit(3)[1]["address"])
-    end
-
-    it "distanceが正しいこと" do
-      expect(@json_by_params[1]["distance"].to eq Spot.sort_by_distance(@lat, @lng, @radius).limit(3)[1].distance_from([@lat, @lng], :units=>:meters))
+    it "returns accurate json data" do
+      expect(@json_by_params.size).to eq 1
+      expect(@json_by_params[0]["name"]).to eq "東京駅"
+      expect(@json_by_params[0]["address"]).to eq "千代田区丸の内1丁目"
+      expect(@json_by_params[0]["distance"]).to eq 153.13775471537662
     end
 
   end
@@ -60,12 +50,12 @@ RSpec.describe "Spots", type: :request do
       @json_by_id = JSON.parse(response.body)
     end
 
-    it "idで指定したスポットの情報を得られること" do
+    it "return status 200" do
       expect(response).to have_http_status(200)
     end
 
-    it "idが正しいこと" do
-      expect(@json_by_id["id"]).to eq 5
+    it "returns json with proper id" do
+      expect(@json_by_id["id"]).to eq 5 
     end
 
   end
