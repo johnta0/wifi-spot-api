@@ -49,6 +49,8 @@ Heroku URL: https://wifi-spot-explorer.herokuapp.com/
 
 [東京駅周辺1000mにあるwifiスポットを、10件まで制限した結果](https://wifi-spot-explorer.herokuapp.com/api/v1/spots?radius=1000&longitude=139.767052&latitude=35.681167&limit=10)
 
+["渋谷"で検索した結果](https://wifi-spot-explorer.herokuapp.com/api/v1/spots/search?word=渋谷)
+
 
 ## 開発に際して参考にしたリンク(漏れあり）
 
