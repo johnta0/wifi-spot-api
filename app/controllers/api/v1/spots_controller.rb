@@ -24,9 +24,6 @@ module Api
           else
            radius = 500
           end
-
-          @spots = Spot.sort_by_distance(latlng, radius)
-
         end
 
         # limitパラメータ
@@ -36,11 +33,7 @@ module Api
           limit = 5
         end
 
-        if limit > @spots.count
-          limit = @spots.count
-        end
-
-        @spots = @spots.limit(limit)
+        @spots = Spot.sort_by_distance(latlng, radius, limit)
 
         # languageパラメータ
         unless params[:lang].nil?
@@ -76,7 +69,21 @@ module Api
 
       # GET /api/v1/spots/search?word=xxx
       def search
-        render json: Spot.find(5)
+
+        if params[:word].nil?
+          return not_found
+        end
+
+        word = params[:word]
+
+        if params[:limit].nil?
+          limit = 10
+        else
+          limit = params[:limit]
+        end
+
+        Spot.search(word, limit)
+
       end
 
       # GET /api/v1/spots/1
@@ -122,6 +129,11 @@ module Api
         def spot_params
           params.require(:spot).permit(:name, :age)
         end
+
+        def not_found
+          raise ActionController::RoutingError.new('Not Found')
+        end
+
       end
   end
 end
