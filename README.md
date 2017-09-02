@@ -29,15 +29,20 @@ ruby 2.4.0
   ```
 CSVファイルからDBにWiFiスポットのデータを入れます。データ量がかなり多いので時間がかかります。
 
-## 動作
-  ```
-  $ rails s
-  ```
+## 機能
+
+  ### 通常機能
+  ```$ rails s```
+
   でサーバーを立ち上げて、
-  ```
-   http://localhost:3000/api/v1/spots?radius=1000&longitude=139.767052&latitude=35.681167&limit=10
-  ```
+
+  ```http://localhost:3000/api/v1/spots?radius=1000&longitude=139.767052&latitude=35.681167&limit=10```
+
   を叩くと「東京駅周辺1000mにあるwifiスポットを、10件まで制限」した結果が返ってきます。radiusの値を省略した場合には、指定した緯度経度から 500m 以内のwifi spot を探します。また、limitパラメータを省略した場合にはレスポンス件数を5件に制限します。
+
+  ### 検索機能
+  ```/api/v1/spots/search?word=XXX ``` のXXX部分のワードを含む住所を検索して、ヒットした情報を表示します。また、limitパラメータで表示件数を制限することも
+  可能です。limitパラメータを指定しなかった場合は5件に制限して表示します。
 
 ## Heroku
 Heroku URL: https://wifi-spot-explorer.herokuapp.com/
