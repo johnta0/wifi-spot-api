@@ -74,6 +74,11 @@ module Api
         render json: @spots
       end
 
+      # GET /api/v1/spots/search?word=xxx
+      def search
+        render json: Spot.find(5)
+      end
+
       # GET /api/v1/spots/1
       def show
         render json: Spot.find(params[:id])
