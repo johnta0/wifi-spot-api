@@ -46,7 +46,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   # gems for test (Rspec)
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.6'
   gem 'factory_girl_rails'
   gem 'guard-rspec', require: false
   gem 'terminal-notifier-guard'
