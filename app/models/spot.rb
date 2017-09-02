@@ -10,11 +10,19 @@ class Spot < ApplicationRecord
       limit = spots.count
     end
 
-    return spots.limit(limit)
+    spots.limit(limit)
+
   end
 
   def self.search(word, limit)
-    self.where('address LIKE ?', '%' + word + '%').limit(limit)
+    spots = self.where('address LIKE ?', '%' + word + '%')
+
+    if limit > spots.count
+      limit = spots.count
+    end
+
+    spots.limit(limit)
+
   end
 
 end

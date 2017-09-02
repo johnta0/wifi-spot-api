@@ -79,11 +79,21 @@ module Api
         if params[:limit].nil?
           limit = 5
         else
-          limit = params[:limit]
+          limit = params[:limit].to_i
         end
 
-        Spot.search(word, limit)
+        @spots = Spot.search(word, limit)
 
+        @spots = @spots.map do |spot|
+          spot = {
+            name: spot.name,
+            address: spot.address,
+            ssid: spot.ssid,
+            url: spot.url
+          }
+        end
+
+        render json: @spots
       end
 
       # GET /api/v1/spots/1
@@ -120,20 +130,19 @@ module Api
       end
 
       private
-        # Use callbacks to share common setup or constraints between actions.
-        def set_spot
-          @spot = Spot.find(params[:id])
-        end
-
-        # Never trust parameters from the scary internet, only allow the white list through.
-        def spot_params
-          params.require(:spot).permit(:name, :age)
-        end
-
-        def not_found
-          raise ActionController::RoutingError.new('Not Found')
-        end
-
+      # Use callbacks to share common setup or constraints between actions.
+      def set_spot
+        @spot = Spot.find(params[:id])
       end
+
+      # Never trust parameters from the scary internet, only allow the white list through.
+      def spot_params
+        params.require(:spot).permit(:name, :age)
+      end
+
+      def not_found
+        raise ActionController::RoutingError.new('Not Found')
+      end
+    end
   end
 end
