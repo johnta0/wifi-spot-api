@@ -77,7 +77,7 @@ module Api
         word = params[:word]
 
         if params[:limit].nil?
-          limit = 10
+          limit = 5
         else
           limit = params[:limit]
         end
