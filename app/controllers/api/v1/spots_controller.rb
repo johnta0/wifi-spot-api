@@ -9,15 +9,15 @@ module Api
       # GET /api/v1/spots/
       def index
 
-        # 緯度経度指定しない場合
+        # 緯度経度パラメータ
         if params[:latitude].nil? or params[:longitude].nil?
           @spots = Spot.all
-        # 緯度経度指定した場合
         else
           lat = params[:latitude].to_f
           lng = params[:longitude].to_f
 
           latlng = [lat, lng]
+
           # radiusパラメータ
           unless params[:radius].nil?
            radius = params[:radius].to_i # km -> m
@@ -42,13 +42,33 @@ module Api
 
         @spots = @spots.limit(limit)
 
-        #### jsonレスポンスに distance を含めるための処理を書く
-        @spots = @spots.map do |spot|
-          spot = {
-            name: spot.name,
-            address: spot.address,
-            distance: spot.distance_from(latlng, :units => :meters)
-          }
+        # languageパラメータ
+        unless params[:lang].nil?
+          lang = params[:lang]
+        else
+          lang = 'ja'
+        end
+
+        if lang == 'ja'
+          @spots = @spots.map do |spot|
+            spot = {
+              name: spot.name,
+              address: spot.address,
+              distance_in_meters: spot.distance_from(latlng, :units => :meters),
+              ssid: spot.ssid,
+              url: spot.url
+            }
+          end
+        elsif lang = 'en'
+          @spots = @spots.map do |spot|
+            spot = {
+              name: spot.english_name,
+              address: spot.address_in_english,
+              distance_in_miles: spot.distance_from(latlng, :units => :miles),
+              ssid: spot.ssid,
+              url: spot.url
+            }
+          end
         end
 
         render json: @spots

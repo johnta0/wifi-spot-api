@@ -6,4 +6,6 @@ class Spot < ApplicationRecord
     self.within(radius, :origin => latlng).by_distance(:origin => latlng)
   end
 
+  
+
 end
