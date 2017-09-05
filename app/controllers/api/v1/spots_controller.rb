@@ -27,7 +27,7 @@ module Api
         end
 
         # limitパラメータ
-        unless params[:limit].nil?
+        unless (params[:limit].nil? or params[:limit].to_i < 1)
           limit = params[:limit].to_i
         else
           limit = 5
